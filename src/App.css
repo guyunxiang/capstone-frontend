@@ -1,0 +1,4 @@
+div {
+  border: 1px solid red; /* Add a border to visualize the component boundaries */
+  color: black;          /* Ensure text color is visible */
+}
