@@ -8,6 +8,7 @@ import Profile from "./pages/Profile";
 import Navbar from "./components/Navbar/Navbar";
 import Footer from "./components/Footer/Footer";
 import DonationPage from "./pages/donation";
+import ForgotPassword from "./pages/ForgotPassword"; 
 
 const App = () => {
   return (
@@ -21,6 +22,7 @@ const App = () => {
         <Route path="/register" element={<Register />} />
         <Route path="/login" element={<LogIn />} />
         <Route path="/donation" element={<DonationPage />} />
+        <Route path="/forgot-password" element={<ForgotPassword />} />
       </Routes>
       <div className="flex-1"></div>
       <Footer />
