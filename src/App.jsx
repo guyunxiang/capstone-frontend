@@ -14,13 +14,15 @@ import Navbar from "./components/Navbar/Navbar";
 import Footer from "./components/Footer/Footer";
 import ForgotPassword from "./pages/ForgotPassword"; 
 
+import BookStorePage from "./components/BookStore/BookStore";
+
 const App = () => {
   return (
     <>
       <Navbar />
       <Routes>
         <Route path="/" element={<Home />} />
-        <Route path="/all-books" element={<AllBooks />} />
+        <Route path="/all-books" element={<BookStorePage />} />
         <Route path="/cart" element={<Cart />} />
         <Route path="/profile" element={<Profile />} />
         <Route path="/register" element={<Register />} />
