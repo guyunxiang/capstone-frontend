@@ -20,7 +20,7 @@ const Hero = () => {
             
             {/* Image Section */}
             <div className="w-full lg:w-3/6 flex items-center justify-center mt-8 lg:mt-0">
-                <img src="./hero.png" alt="hero" className="h-48 md:h-72 lg:h-full object-contain" />
+                <img src="./hero.jpg" alt="hero" className="h-48 md:h-72 lg:h-full object-contain" />
             </div>
         </div>
     );
