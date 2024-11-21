@@ -1,6 +1,6 @@
-// src/pages/ForgotPassword.jsx
-import React, { useState } from "react";
+import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { toast } from 'react-toastify'
 
 const ForgotPassword = () => {
   const [email, setEmail] = useState("");
@@ -15,7 +15,7 @@ const ForgotPassword = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await fetch("/api/users/forgot-password", {
+      const response = await fetch("/api/users/reset-password", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -24,7 +24,18 @@ const ForgotPassword = () => {
       });
 
       if (response.ok) {
-        setSuccess("If this email is registered, you will receive a reset link shortly.");
+        toast(
+          `If this email is registered, you will receive a reset link shortly.`,
+          {
+            position: "bottom-right",
+            autoClose: 5000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            theme: "dark",
+          }
+        );
         setError(null); // Clear any previous errors
         // Optionally, redirect to login or another page after success
       } else {
