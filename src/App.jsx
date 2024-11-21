@@ -1,4 +1,9 @@
 import { Routes, Route } from "react-router-dom";
+
+  import { ToastContainer } from "react-toastify";
+  import "react-toastify/dist/ReactToastify.css";
+
+
 import Home from "./pages/Home";
 import AllBooks from "./pages/AllBooks";
 import LogIn from "./pages/LogIn";
@@ -25,6 +30,7 @@ const App = () => {
         <Route path="/forgot-password" element={<ForgotPassword />} />
       </Routes>
       <div className="flex-1"></div>
+      <ToastContainer />
       <Footer />
     </>
   );
