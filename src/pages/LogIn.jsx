@@ -1,12 +1,16 @@
-import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useState } from "react";
+import { useNavigate, useSearchParams } from "react-router-dom";
 import { useAuth } from "../context/AuthContext";
 
 const Login = () => {
+
+  const [searchParams] = useSearchParams();
+
   const [formData, setFormData] = useState({
-    email: "",
+    email: searchParams.get("email") || "",
     password: "",
   });
+
   const [error, setError] = useState(null);
   const navigate = useNavigate();
   const { login } = useAuth(); // Get login function from context
