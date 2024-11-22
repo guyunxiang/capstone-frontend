@@ -30,7 +30,14 @@ const App = () => {
         <Route path="/forgot-password" element={<ForgotPassword />} />
       </Routes>
       <div className="flex-1"></div>
-      <ToastContainer />
+      <ToastContainer
+        position="bottom-right"
+        autoClose={3000}
+        hideProgressBar={false}
+        pauseOnHover
+        draggable
+        theme="dark"
+      />
       <Footer />
     </>
   );
