@@ -54,6 +54,9 @@ const BookStorePage = () => {
 
   return (
     <div className="book-store-page">
+      <h1 className="text-2xl md:text-4xl lg:text-6xl font-semibold text-black-100">
+        Browse our catalogue!
+      </h1>
            <div className="search-container">
         <input
           type="text"
