@@ -54,38 +54,7 @@ const BookStorePage = () => {
 
   return (
     <div className="book-store-page">
-      <h1>Book Store</h1>
-      <h2>Welcome to the Book Store!</h2>
-
-      <nav className="navbar">
-        <ul>
-          <li className="logo-container">
-            <a href="/">
-              <img src="\logo.jpeg" alt="Book Store Logo" className="logo" />
-            </a>
-          </li>
-          <li>
-            <a href="/">Home</a>
-          </li>
-          <li>
-            <a href="/bookstore">Book Store</a>
-          </li>
-          <li>
-            <a href="/library">Library</a>
-          </li>
-          <li>
-            <a href="/profile">Profile</a>
-          </li>
-          <li>
-            <button className="login-button">Login</button>
-          </li>
-          <li>
-            <button className="signup-button">Signup</button>
-          </li>
-        </ul>
-      </nav>
-
-      <div className="search-container">
+           <div className="search-container">
         <input
           type="text"
           placeholder="Search for a book!"
