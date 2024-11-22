@@ -3,7 +3,6 @@ import { useState, useEffect } from "react";
 import { useSearchParams, useNavigate } from "react-router-dom";
 
 const ForgotPassword = () => {
-
   const [searchParams] = useSearchParams();
   const [email, token] = [searchParams.get("email"), searchParams.get("token")];
   const navigate = useNavigate();
@@ -63,6 +62,9 @@ const ForgotPassword = () => {
 
   // Reset password
   const handleResetPassword = async () => {
+    // If token is not present, return
+    if (!token) return;
+    // Validate password
     if (!validateFormPassword()) return;
     try {
       const response = await fetch("/api/users/reset-password", {
