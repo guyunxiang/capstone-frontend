@@ -3,7 +3,6 @@ import { useState, useEffect } from "react";
 import { useSearchParams, useNavigate } from "react-router-dom";
 
 const ForgotPassword = () => {
-  const [resetFormVisible, setResetFormVisible] = useState(false);
 
   const [searchParams] = useSearchParams();
   const [email, token] = [searchParams.get("email"), searchParams.get("token")];
@@ -14,7 +13,6 @@ const ForgotPassword = () => {
   useEffect(() => {
     if (email && token) {
       setForm({ email, token });
-      setResetFormVisible(true);
     }
   }, [email, token]);
 
@@ -34,10 +32,12 @@ const ForgotPassword = () => {
 
   // Send email to reset password
   const handleSendEmail = async () => {
-    if (resetFormVisible) return;
+    // If email is not present, return
     if (!form.email) {
       return toast.error("Please enter your email.");
     }
+    // If token is present, no need to send email
+    if (token) return;
     try {
       const response = await fetch("/api/users/forgot-password", {
         method: "POST",
@@ -63,7 +63,6 @@ const ForgotPassword = () => {
 
   // Reset password
   const handleResetPassword = async () => {
-    if (!resetFormVisible) return;
     if (!validateFormPassword()) return;
     try {
       const response = await fetch("/api/users/reset-password", {
@@ -78,7 +77,6 @@ const ForgotPassword = () => {
         toast("Password reset successfully!");
         navigate("/login?email=" + email);
         setForm({});
-        setResetFormVisible(false);
       } else {
         const result = await response.json();
         toast.error(result.message);
@@ -98,6 +96,7 @@ const ForgotPassword = () => {
 
   // Render reset password form
   const renderResetForm = () => {
+    if (!token) return null;
     return (
       <div className="flex flex-col gap-3">
         <input
