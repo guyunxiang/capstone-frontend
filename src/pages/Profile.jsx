@@ -41,7 +41,7 @@ const Profile = () => {
               }}
             />
           </div>
-          <div className="mt-3">
+          <div className="mt-4">
             <PayPalButtons
               key={amount}
               createOrder={(data, actions) => {
@@ -58,15 +58,7 @@ const Profile = () => {
               onApprove={(data, actions) => {
                 return actions.order.capture().then(function (details) {
                   console.log(details.payer.name.given_name);
-                  toast(`🦄 Thank you so much for your generous donation!`, {
-                    position: "bottom-right",
-                    autoClose: 5000,
-                    hideProgressBar: false,
-                    closeOnClick: true,
-                    pauseOnHover: true,
-                    draggable: true,
-                    theme: "dark",
-                  });
+                  toast(`🦄 Thank you so much for your generous donation!`);
                 });
               }}
             />
