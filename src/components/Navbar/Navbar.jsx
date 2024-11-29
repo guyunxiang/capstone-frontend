@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useAuth } from "../../context/AuthContext";
 
@@ -10,7 +10,7 @@ const Navbar = () => {
   const links = [
     { title: "Home", link: "/" },
     { title: "Book Store", link: "/all-books" },
-    user && { title: "Library", link: "/cart" },
+    // user && { title: "Library", link: "/cart" },
     user && { title: "Profile", link: "/profile" },
   ].filter(Boolean); // Filter out any falsey values like `undefined` or `null`
 
