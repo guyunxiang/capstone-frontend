@@ -1,114 +1,353 @@
 .book-details-container {
-    display: flex;
-    flex-direction: row;
-    max-width: 1000px;
-    margin: 2rem auto;
-    background-color: #000000;
-    border-radius: 16px;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
-    overflow: hidden;
-    transition: all 0.3s ease;
+  display: flex;
+  flex-direction: row;
+  max-width: 1000px;
+  margin: 2rem auto;
+  background-color: #000000;
+  border-radius: 16px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+  overflow: hidden;
+  transition: all 0.3s ease;
+}
+.button-group {
+  display: flex;
+  gap: 1rem;
+}
+
+.bookmark-button {
+  width: 100%;
+  padding: 1rem;
+  background-color: #f1c40f;
+  color: #18181B;
+  border: none;
+  border-radius: 8px;
+  font-size: 1.1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 15px rgba(241, 196, 15, 0.3);
+}
+
+.bookmark-button:hover {
+  background-color: #d4ac0d;
+  transform: translateY(-3px);
+  box-shadow: 0 6px 20px rgba(241, 196, 15, 0.4);
+}
+
+.bookmark-button.bookmarked {
+  background-color: #27ae60;
+  color: #fff;
+  cursor: not-allowed;
+}
+
+.bookmark-button.bookmarked:hover {
+  transform: none;
+  box-shadow: none;
+}
+
+/* Responsive Design Adjustments */
+@media screen and (max-width: 768px) {
+  .button-group {
+    flex-direction: column;
   }
-  
-  .book-header {
-    flex: 1;
-    overflow: hidden;
-    position: relative;
+}
+
+
+.cart-container {
+  max-width: 1200px;
+  margin: 2rem auto;
+  padding: 0 1rem;
+}
+
+.cart-title {
+  text-align: center;
+  font-size: 2.5rem;
+  font-weight: bold;
+  margin-bottom: 2rem;
+  color: #fef9c3;
+}
+
+.cart-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 2rem;
+}
+
+.cart-item {
+  background: #18181b;
+  border-radius: 10px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  padding: 1rem;
+}
+
+.cart-item:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+}
+
+.cart-item-image {
+  width: 100%;
+  height: 250px;
+  object-fit: cover;
+  border-radius: 8px;
+  margin-bottom: 1rem;
+}
+
+.cart-item-info {
+  padding: 1rem;
+}
+
+.cart-item-title {
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: #fef9c3;
+  margin-bottom: 0.5rem;
+}
+
+.cart-item-author {
+  font-size: 1rem;
+  color: #a3a3a3;
+  margin-bottom: 1rem;
+}
+
+.read-now-button {
+  background: #fef9c3;
+  color: #18181b;
+  border: none;
+  border-radius: 5px;
+  padding: 0.6rem 1.2rem;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+.read-now-button:hover {
+  background-color: #e8e3ad;
+  transform: translateY(-2px);
+}
+
+.empty-cart {
+  text-align: center;
+  font-size: 1.5rem;
+  color: #a3a3a3;
+  margin-top: 2rem;
+}
+
+/* Bookmark Button */
+.bookmark-button {
+padding: 0.5rem 1rem;
+margin-left: 1rem;
+background-color: #FFD700;
+color: #18181B;
+border: none;
+border-radius: 5px;
+font-size: 1rem;
+cursor: pointer;
+transition: all 0.3s ease;
+}
+
+.bookmark-button.bookmarked {
+background-color: #FFA500;
+color: white;
+}
+
+.bookmark-button:disabled {
+background-color: #ccc;
+cursor: not-allowed;
+}
+
+/* Other existing CSS remains unchanged */
+
+
+.reviews-container {
+
+  background-color: #f9f9fc;
+  padding: 1.5rem;
+  border-radius: 8px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.reviews-container h2 {
+  font-size: 1.8rem;
+  font-weight: bold;
+  margin-bottom: 1rem;
+  color: #333;
+}
+
+.add-review {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  margin-bottom: 2rem;
+}
+
+.review-textarea {
+  width: 100%;
+  height: 80px;
+  padding: 0.5rem;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+  font-size: 1rem;
+}
+
+.rating-stars {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.add-review-button {
+  padding: 0.5rem 1rem;
+  background-color: #3498db;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.add-review-button:disabled {
+  background-color: #ccc;
+  cursor: not-allowed;
+}
+
+.reviews-list {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.review-card {
+  background-color: #ffffff;
+  padding: 1rem;
+  border-radius: 8px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.review-stars {
+  display: flex;
+  gap: 0.2rem;
+  margin-bottom: 0.5rem;
+}
+
+.review-text {
+  font-size: 1rem;
+  color: #333;
+  margin-bottom: 0.5rem;
+}
+
+.review-author {
+  font-size: 0.8rem;
+  color: #aaa;
+}
+
+
+
+.book-header {
+  flex: 1;
+  overflow: hidden;
+  position: relative;
+}
+
+.book-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.4s ease;
+}
+
+.book-info {
+  flex: 2;
+  padding: 2rem;
+  color: #333;
+}
+
+.book-title {
+  font-size: 2.5rem;
+  font-weight: 700;
+  color: #2c3e50;
+  margin-bottom: 1rem;
+  line-height: 1.2;
+}
+
+.book-description {
+  font-size: 1rem;
+  color: #555;
+  line-height: 1.6;
+  margin-bottom: 1.5rem;
+}
+
+.book-author,
+.book-publisher {
+  font-size: 1rem;
+  color: #7f8c8d;
+  margin-bottom: 0.5rem;
+  display: flex;
+  align-items: center;
+}
+
+.book-author::before,
+.book-publisher::before {
+  content: '•';
+  margin-right: 0.5rem;
+  color: #3498db;
+}
+
+.read-now-button {
+  width: 100%;
+  padding: 1rem;
+  background-color: #3498db;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-size: 1.1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 15px rgba(52, 152, 219, 0.3);
+}
+
+.read-now-button:hover {
+  background-color: #2980b9;
+  transform: translateY(-3px);
+  box-shadow: 0 6px 20px rgba(52, 152, 219, 0.4);
+}
+
+/* Responsive Design */
+@media screen and (max-width: 768px) {
+  .book-details-container {
+    flex-direction: column;
+    margin: 1rem;
+    border-radius: 12px;
   }
-  
-  .book-image {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    transition: transform 0.4s ease;
-  }
-  
+
   .book-info {
-    flex: 2;
-    padding: 2rem;
-    color: #333;
+    padding: 1.5rem;
   }
-  
-  .book-title {
-    font-size: 2.5rem;
-    font-weight: 700;
-    color: #2c3e50;
-    margin-bottom: 1rem;
-    line-height: 1.2;
-  }
-  
-  .book-description {
-    font-size: 1rem;
-    color: #555;
-    line-height: 1.6;
-    margin-bottom: 1.5rem;
-  }
-  
-  .book-author,
-  .book-publisher {
-    font-size: 1rem;
-    color: #7f8c8d;
-    margin-bottom: 0.5rem;
-    display: flex;
-    align-items: center;
-  }
-  
-  .book-author::before,
-  .book-publisher::before {
-    content: '•';
-    margin-right: 0.5rem;
-    color: #3498db;
-  }
-  
+
   .read-now-button {
-    width: 100%;
+    margin: 0 auto;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .book-title {
+    font-size: 1.8rem;
+  }
+
+  .book-info {
     padding: 1rem;
-    background-color: #3498db;
-    color: white;
-    border: none;
-    border-radius: 8px;
-    font-size: 1.1rem;
-    font-weight: 600;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    box-shadow: 0 4px 15px rgba(52, 152, 219, 0.3);
   }
-  
-  .read-now-button:hover {
-    background-color: #2980b9;
-    transform: translateY(-3px);
-    box-shadow: 0 6px 20px rgba(52, 152, 219, 0.4);
+
+  .read-now-button {
+    font-size: 1rem;
+    padding: 0.8rem;
   }
-  
-  /* Responsive Design */
-  @media screen and (max-width: 768px) {
-    .book-details-container {
-      flex-direction: column;
-      margin: 1rem;
-      border-radius: 12px;
-    }
-  
-    .book-info {
-      padding: 1.5rem;
-    }
-  
-    .read-now-button {
-      margin: 0 auto;
-    }
-  }
-  
-  @media screen and (max-width: 480px) {
-    .book-title {
-      font-size: 1.8rem;
-    }
-  
-    .book-info {
-      padding: 1rem;
-    }
-  
-    .read-now-button {
-      font-size: 1rem;
-      padding: 0.8rem;
-    }
-  }
-  
+}
