@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
+import { Link } from "react-router-dom";
 import "./BookStore.css";
 
 const BookStorePage = () => {
@@ -121,13 +122,11 @@ const BookStorePage = () => {
                 {new Date(book.publish_date).toDateString()}
               </p>
               <p>{book.summary || "No summary available."}</p>
-              <a
-                href={`/book/${book._id}`}
-                target="_blank"
-                rel="noopener noreferrer"
+              <Link
+                to={`/book/${book._id}`}
               >
                 <button className="read-button">Read Now</button>
-              </a>
+              </Link>
             </div>
           ))}
         </div>
