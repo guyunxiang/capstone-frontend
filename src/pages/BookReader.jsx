@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useRef } from "react";
+import { useEffect, useState, useRef } from "react";
 import axios from "axios";
 import { useParams } from "react-router-dom";
 import Epub from "epubjs"; // Import EPUB.js
@@ -13,7 +13,7 @@ const BookReader = () => {
   useEffect(() => {
     const fetchBook = async () => {
       try {
-        const response = await axios.get(`http://localhost:4000/api/books/${bookId}`);
+        const response = await axios.get(`/api/books/${bookId}`);
         setBook(response.data);
       } catch (error) {
         console.error("Error fetching book data:", error);
@@ -26,6 +26,7 @@ const BookReader = () => {
   // Render EPUB using EPUB.js
   useEffect(() => {
     if (book && book.file_page.endsWith(".epub")) {
+      console.log(29, book)
       const epubBook = Epub(book.file_page); // Initialize EPUB.js with the file URL
       epubBook.renderTo(viewerRef.current); // Render to the designated container
     }

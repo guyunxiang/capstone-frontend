@@ -122,7 +122,7 @@ const BookStorePage = () => {
               </p>
               <p>{book.summary || "No summary available."}</p>
               <a
-                href={book.file_page}
+                href={`/book/${book._id}`}
                 target="_blank"
                 rel="noopener noreferrer"
               >

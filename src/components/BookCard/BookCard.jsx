@@ -2,8 +2,6 @@ import React from "react";
 import { Link } from "react-router-dom";
 
 const BookCard = ({ data }) => {
-  console.log(data); // Verify book data
-
   return (
     <Link to={`/book/${data._id}`} className="block">
       <div className="bg-zinc-800 rounded p-4 flex flex-col">
