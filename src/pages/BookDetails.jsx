@@ -125,12 +125,19 @@ const BookDetails = () => {
       {/* Reviews Section */}
       <div className="reviews-container">
         <h2>Reviews</h2>
+
+        {/* Add Review */}
         <div className="add-review">
+          <label htmlFor="review-text" className="review-label">
+            Write your review:
+          </label>
           <textarea
-            value={reviewText}
-            onChange={(e) => setReviewText(e.target.value)}
+            id="review-text"
+            name="review-text"
             placeholder="Write your review..."
             className="review-textarea"
+            value={reviewText}
+            onChange={(e) => setReviewText(e.target.value)}
           />
           <div className="rating-stars">
             {[...Array(5)].map((_, index) => (
@@ -151,6 +158,8 @@ const BookDetails = () => {
             {isSubmitting ? "Submitting..." : "Submit Review"}
           </button>
         </div>
+
+        {/* Display Reviews */}
         <div className="reviews-list">
           {reviews.map((review) => (
             <div className="review-card" key={review._id}>
