@@ -24,13 +24,21 @@ const Navbar = () => {
       <div className="flex items-center justify-between">
         <div className="flex items-center gap-0">
           <Link className="flex" to="/">
-            <img className="h-10 w-40 object-contain" src="./logo.jpeg" alt="logo" />
+            <img
+              className="h-10 w-40 object-contain"
+              src="./logo.jpeg"
+              alt="logo"
+            />
           </Link>
         </div>
         {/* Desktop Navbar */}
         <div className="hidden lg:flex items-center gap-8">
           {links.map((item, index) => (
-            <Link key={index} to={item.link} className="hover:text-blue-500 transition-all">
+            <Link
+              key={index}
+              to={item.link}
+              className="hover:text-blue-500 transition-all"
+            >
               {item.title}
             </Link>
           ))}
