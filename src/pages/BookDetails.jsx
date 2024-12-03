@@ -1,8 +1,10 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import axios from "axios";
 import { useParams, useNavigate } from "react-router-dom";
 import { FaStar } from "react-icons/fa";
 import "./BookDetails.css";
+
+const baseUrl = import.meta.env.VITE_API_BASE_URL;
 
 const BookDetails = () => {
   const { bookId } = useParams();
@@ -18,15 +20,22 @@ const BookDetails = () => {
   useEffect(() => {
     const fetchBookData = async () => {
       try {
-        const bookResponse = await axios.get(`/api/books/${bookId}`);
+        const bookResponse = await axios.get(`${baseUrl}/api/books/${bookId}`);
         setBook(bookResponse.data);
 
-        const reviewsResponse = await axios.get(`/api/reviews/${bookId}`);
+        const reviewsResponse = await axios.get(
+          `${baseUrl}/api/reviews/${bookId}`
+        );
         setReviews(reviewsResponse.data.reviews);
 
-        const bookmarkResponse = await axios.get(`/api/bookmarks/${bookId}`, {
-          headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
-        });
+        const bookmarkResponse = await axios.get(
+          `${baseUrl}/api/bookmarks/${bookId}`,
+          {
+            headers: {
+              Authorization: `Bearer ${localStorage.getItem("token")}`,
+            },
+          }
+        );
         setIsBookmarked(bookmarkResponse.data.isBookmarked);
       } catch (error) {
         console.error("Error fetching book data:", error);
@@ -41,7 +50,7 @@ const BookDetails = () => {
     setIsSubmitting(true);
     try {
       const response = await axios.post(
-        `/api/reviews/add`,
+        `${baseUrl}/api/reviews/add`,
         { rating, comment: reviewText, book_id: bookId },
         {
           headers: {
@@ -69,7 +78,7 @@ const BookDetails = () => {
   const handleBookmark = async () => {
     try {
       const response = await axios.post(
-        `/api/bookmarks/${bookId}/add`,
+        `${baseUrl}/api/bookmarks/${bookId}/add`,
         {},
         {
           headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
