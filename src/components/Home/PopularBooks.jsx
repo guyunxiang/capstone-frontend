@@ -10,7 +10,10 @@ const PopularBooks = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await fetch(baseUrl + "/api/page/home");
+        const response = await fetch(baseUrl + "/api/page/home", {
+          method: "GET",
+          credentials: "include",
+        });
         if (!response.ok) {
           throw new Error(`HTTP error! status: ${response.status}`);
         }

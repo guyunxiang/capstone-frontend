@@ -46,6 +46,7 @@ const ForgotPassword = () => {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({ email: form.email }),
+        credentials: "include",
       });
 
       if (response.ok) {
@@ -75,6 +76,7 @@ const ForgotPassword = () => {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({ email, token, password: form.password }),
+        credentials: "include",
       });
 
       if (response.ok) {

@@ -10,7 +10,10 @@ const RecentlyAdded = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await fetch(baseUrl + "/api/page/home"); // Adjusted endpoint
+        const response = await fetch(baseUrl + "/api/page/home", {
+          method: "GET",
+          credentials: "include",
+        }); // Adjusted endpoint
         if (!response.ok) {
           throw new Error(`HTTP error! status: ${response.status}`);
         }
