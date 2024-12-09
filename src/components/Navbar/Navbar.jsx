@@ -61,7 +61,7 @@ const Navbar = () => {
                   </button>
                 </Link>
                 <Link to="/register">
-                  <button className="px-4 py-2 bg-blue-500 text-white border rounded">
+                  <button className="px-4 py-2 bg-white text-zinc-800 border rounded">
                     Register
                   </button>
                 </Link>
@@ -75,6 +75,7 @@ const Navbar = () => {
           <button
             onClick={() => setIsMenuOpen(!isMenuOpen)}
             className="text-white focus:outline-none"
+            aria-label={isMenuOpen ? "Close menu" : "Open menu"} // Dynamic label for better accessibility
           >
             <svg
               className="w-6 h-6"
@@ -92,6 +93,7 @@ const Navbar = () => {
             </svg>
           </button>
         </div>
+
       </div>
 
       {/* Mobile Dropdown Menu */}
@@ -125,7 +127,7 @@ const Navbar = () => {
                 </button>
               </Link>
               <Link to="/register" onClick={() => setIsMenuOpen(false)}>
-                <button className="w-full px-4 py-2 bg-blue-500 text-white border rounded mt-4">
+                <button className="w-full px-4 py-2 bg-white text-zinc-800 border rounded">
                   Register
                 </button>
               </Link>
