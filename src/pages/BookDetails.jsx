@@ -1,8 +1,13 @@
-import React, { useEffect, useState } from "react";
 import axios from "axios";
+import { toast } from "react-toastify";
+import { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { FaStar } from "react-icons/fa";
+
+import { useAuth } from "../context/AuthContext";
 import "./BookDetails.css";
+
+const baseUrl = import.meta.env.VITE_API_BASE_URL;
 
 const BookDetails = () => {
   const { bookId } = useParams();
@@ -12,36 +17,56 @@ const BookDetails = () => {
   const [rating, setRating] = useState(0);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isBookmarked, setIsBookmarked] = useState(false);
+  const [bookmarkId, setBookmarkId] = useState(null);
   const navigate = useNavigate();
+
+  const { user } = useAuth();
 
   // Fetch book details and reviews
   useEffect(() => {
     const fetchBookData = async () => {
       try {
-        const bookResponse = await axios.get(`/api/books/${bookId}`);
+        const bookResponse = await axios.get(`${baseUrl}/api/books/${bookId}`);
         setBook(bookResponse.data);
 
-        const reviewsResponse = await axios.get(`/api/reviews/${bookId}`);
+        const reviewsResponse = await axios.get(
+          `${baseUrl}/api/books/${bookId}/reviews`
+        );
         setReviews(reviewsResponse.data.reviews);
 
-        const bookmarkResponse = await axios.get(`/api/bookmarks/${bookId}`, {
-          headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
-        });
-        setIsBookmarked(bookmarkResponse.data.isBookmarked);
+        if (user) {
+          const bookmarksResponse = await axios.get(
+            `${baseUrl}/api/users/favorites`,
+            {
+              withCredentials: true,
+            }
+          );
+          const bookmarks = bookmarksResponse.data;
+          const bookmark = bookmarks.find((b) => b.book_id._id === bookId);
+          if (bookmark) {
+            setIsBookmarked(true);
+            setBookmarkId(bookmark._id);
+          }
+        }
       } catch (error) {
         console.error("Error fetching book data:", error);
       }
     };
 
     fetchBookData();
-  }, [bookId]);
+  }, [bookId, user]);
 
   // Add a review
   const handleAddReview = async () => {
+    if (!user) {
+      toast("You must log in to add bookmarks.");
+      navigate("/login");
+      return;
+    }
     setIsSubmitting(true);
     try {
       const response = await axios.post(
-        `/api/reviews/add`,
+        `${baseUrl}/api/reviews/add`,
         { rating, comment: reviewText, book_id: bookId },
         {
           headers: {
@@ -66,27 +91,26 @@ const BookDetails = () => {
   };
 
   // Add to Favorites (Bookmark)
+  // Favorite feature is different from the bookmark feature, comment by @yunxinag
   const handleBookmark = async () => {
+    if (!user) {
+      toast("You must log in to add bookmarks.");
+      navigate("/login");
+      return;
+    }
     try {
-      const response = await axios.post(
-        `/api/bookmarks/${bookId}/add`,
-        {},
+      const response = await axios.put(
+        `${baseUrl}/api/users/favorite/add`,
         {
-          headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
-        }
+          book_id: bookId,
+        },
       );
-      if (response.status === 201) {
+      if (response.status === 200) {
         setIsBookmarked(true);
-        alert("Book added to favorites!");
+        alert(response.data.message);
       }
     } catch (error) {
-      if (error.response?.status === 401) {
-        alert("You must log in to add to favorites.");
-        navigate("/login");
-      } else {
-        console.error("Error adding bookmark:", error);
-        alert("Failed to add to favorites.");
-      }
+      toast(error.response?.data.message);
     }
   };
 
@@ -125,12 +149,19 @@ const BookDetails = () => {
       {/* Reviews Section */}
       <div className="reviews-container">
         <h2>Reviews</h2>
+
+        {/* Add Review */}
         <div className="add-review">
+          <label htmlFor="review-text" className="review-label">
+            Write your review:
+          </label>
           <textarea
-            value={reviewText}
-            onChange={(e) => setReviewText(e.target.value)}
+            id="review-text"
+            name="review-text"
             placeholder="Write your review..."
             className="review-textarea"
+            value={reviewText}
+            onChange={(e) => setReviewText(e.target.value)}
           />
           <div className="rating-stars">
             {[...Array(5)].map((_, index) => (
@@ -151,6 +182,8 @@ const BookDetails = () => {
             {isSubmitting ? "Submitting..." : "Submit Review"}
           </button>
         </div>
+
+        {/* Display Reviews */}
         <div className="reviews-list">
           {reviews.map((review) => (
             <div className="review-card" key={review._id}>
