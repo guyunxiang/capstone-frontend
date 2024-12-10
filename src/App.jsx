@@ -1,5 +1,7 @@
 import { Routes, Route } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
+import axios from "axios";
+
 import "react-toastify/dist/ReactToastify.css";
 
 import Home from "./pages/Home";
@@ -13,6 +15,8 @@ import ForgotPassword from "./pages/ForgotPassword";
 import BookReader from "./pages/BookReader";
 import BookDetails from "./pages/BookDetails";
 import BookStorePage from "./components/BookStore/BookStore";
+
+axios.defaults.withCredentials = true;
 
 const App = () => {
   return (

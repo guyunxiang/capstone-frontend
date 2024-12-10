@@ -79,13 +79,7 @@ const BookDetails = () => {
       setRating(0);
       alert("Review added successfully!");
     } catch (error) {
-      if (error.response?.status === 401) {
-        alert("You must log in to leave a review.");
-        navigate("/login");
-      } else {
-        console.error("Error adding review:", error);
-        alert("Failed to add review.");
-      }
+      toast(error.response?.data.message);
     }
     setIsSubmitting(false);
   };
