@@ -61,7 +61,11 @@ const BookStorePage = () => {
         Browse our catalogue!
       </h1>
       <div className="search-container">
+        <label htmlFor="search-bar" className="sr-only">
+          Search for a book
+        </label>
         <input
+          id="search-bar"
           type="text"
           placeholder="Search for a book!"
           value={searchQuery}
