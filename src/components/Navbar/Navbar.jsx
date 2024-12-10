@@ -48,7 +48,7 @@ const Navbar = () => {
                 <span className="text-white">Hi, {user.username}</span>
                 <button
                   onClick={handleLogout}
-                  className="px-4 py-2 bg-blue-500 text-white border rounded"
+                  className="px-4 py-2 bg-white text-zinc-800 border rounded"
                 >
                   Logout
                 </button>
