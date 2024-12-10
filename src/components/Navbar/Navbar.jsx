@@ -11,7 +11,7 @@ const Navbar = () => {
     { title: "Home", link: "/" },
     { title: "Book Store", link: "/all-books" },
     // user && { title: "Library", link: "/cart" },
-    user && { title: "Profile", link: "/profile" },
+    user && { title: "Donation", link: "/profile" },
   ].filter(Boolean); // Filter out any falsey values like `undefined` or `null`
 
   const handleLogout = () => {
@@ -93,7 +93,6 @@ const Navbar = () => {
             </svg>
           </button>
         </div>
-
       </div>
 
       {/* Mobile Dropdown Menu */}
