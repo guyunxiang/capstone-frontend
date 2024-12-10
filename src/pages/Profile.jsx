@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { PayPalScriptProvider, PayPalButtons } from "@paypal/react-paypal-js";
-  import { toast } from "react-toastify";
-
+import { toast } from "react-toastify";
+import { jsPDF } from "jspdf";
 
 const Profile = () => {
   const { VITE_Paypal_Client_ID } = import.meta.env;
@@ -12,6 +12,26 @@ const Profile = () => {
   };
 
   const [amount, setAmount] = useState(5);
+
+  const generatePDF = (details) => {
+    const { payer, purchase_units } = details;
+
+    const doc = new jsPDF();
+
+    doc.addImage("./logo.jpeg", "JPEG", 10, 10, 50, 20);
+    doc.setFontSize(18);
+    doc.text("Donation Receipt", 105, 20, null, null, "center");
+    doc.setFontSize(14);
+    doc.text(
+      `Thank you, ${payer.name.given_name}, for your generous donation!`,
+      20,
+      40
+    );
+    doc.text(`Amount: $${purchase_units[0].amount.value}`, 20, 60);
+    doc.text(`Transaction ID: ${details.id}`, 20, 80);
+    doc.text(`Date: ${new Date().toLocaleString()}`, 20, 100);
+    doc.save("donation_recipt.pdf");
+  };
 
   return (
     <PayPalScriptProvider options={initialOptions}>
@@ -59,6 +79,7 @@ const Profile = () => {
                 return actions.order.capture().then(function (details) {
                   console.log(details.payer.name.given_name);
                   toast(`🦄 Thank you so much for your generous donation!`);
+                  generatePDF(details);
                 });
               }}
             />
@@ -67,6 +88,6 @@ const Profile = () => {
       </div>
     </PayPalScriptProvider>
   );
-}
+};
 
 export default Profile;
